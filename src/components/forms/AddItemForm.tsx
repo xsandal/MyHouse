@@ -51,12 +51,29 @@ export function AddItemForm({ onClose }: Props) {
 
       if (category === 'garden') {
         if (isGardenTask) {
-          await addItem({ ...base, type: 'task', description: description.trim() || undefined, lastPerformed: null, locationImageUrl: null })
+          await addItem({
+            ...base,
+            type: 'task',
+            ...(description.trim() ? { description: description.trim() } : {}),
+            lastPerformed: null,
+            locationImageUrl: null,
+          })
         } else {
-          await addItem({ ...base, type, variety: variety.trim() || undefined, locationText: locationText.trim() || undefined, locationImageUrl: null })
+          await addItem({
+            ...base,
+            type,
+            ...(variety.trim() ? { variety: variety.trim() } : {}),
+            ...(locationText.trim() ? { locationText: locationText.trim() } : {}),
+            locationImageUrl: null,
+          })
         }
       } else {
-        await addItem({ ...base, houseCategory, description: description.trim() || undefined, lastPerformed: null })
+        await addItem({
+          ...base,
+          houseCategory,
+          ...(description.trim() ? { description: description.trim() } : {}),
+          lastPerformed: null,
+        })
       }
       onClose()
     } finally {
