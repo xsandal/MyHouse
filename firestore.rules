@@ -38,7 +38,8 @@ service cloud.firestore {
 
     match /careAdvice/{itemId} {
       allow read: if isSignedIn();
-      allow write: if false; // kun Cloud Functions skriver
+      allow write: if false; // Cloud Functions opretter/opdaterer
+      allow delete: if isSignedIn(); // klienten må invalidere ved navn/sort-ændring
     }
   }
 }
