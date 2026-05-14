@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <title>Generer PWA-ikoner</title>
+  <style>
+    body { font-family: sans-serif; padding: 32px; background: #f9fafb; }
+    canvas { border-radius: 24px; box-shadow: 0 4px 20px rgba(0,0,0,.15); margin: 16px; }
+    button { margin: 8px; padding: 10px 20px; background: #1D9E75; color: white; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; }
+    button:hover { background: #178a63; }
+    .row { display: flex; align-items: flex-end; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <h2>MyHouse – PWA-ikon generator</h2>
+  <p>Klik på knapperne for at downloade ikonerne og læg dem i <code>public/</code>.</p>
+  <div class="row">
+    <div><p>192 × 192</p><canvas id="c192" width="192" height="192"></canvas><br><button onclick="download('c192','pwa-192x192.png')">Download pwa-192x192.png</button></div>
+    <div><p>512 × 512</p><canvas id="c512" width="512" height="512"></canvas><br><button onclick="download('c512','pwa-512x512.png')">Download pwa-512x512.png</button></div>
+  </div>
+  <script>
+    function drawIcon(canvas) {
+      const s = canvas.width
+      const ctx = canvas.getContext('2d')
+      const r = s * 0.18   // corner radius
+
+      // Grøn baggrund med runde hjørner
+      ctx.beginPath()
+      ctx.roundRect(0, 0, s, s, r)
+      ctx.fillStyle = '#1D9E75'
+      ctx.fill()
+
+      ctx.fillStyle = '#ffffff'
+      ctx.strokeStyle = '#ffffff'
+      ctx.lineCap = 'round'
+      ctx.lineJoin = 'round'
+
+      const u = s / 100  // enhed
+
+      // --- Hus ---
+      // Tag
+      ctx.beginPath()
+      ctx.moveTo(50 * u, 18 * u)   // top
+      ctx.lineTo(82 * u, 44 * u)   // højre tagfod
+      ctx.lineTo(74 * u, 44 * u)
+      ctx.lineTo(74 * u, 70 * u)   // højre mur
+      ctx.lineTo(26 * u, 70 * u)   // venstre mur
+      ctx.lineTo(26 * u, 44 * u)
+      ctx.lineTo(18 * u, 44 * u)   // venstre tagfod
+      ctx.closePath()
+      ctx.fill()
+
+      // Dør
+      ctx.fillStyle = '#1D9E75'
+      ctx.beginPath()
+      ctx.roundRect(43 * u, 53 * u, 14 * u, 17 * u, 3 * u)
+      ctx.fill()
+
+      // --- Blad (nedenfor huset) ---
+      ctx.fillStyle = '#a7f3d0'
+      ctx.beginPath()
+      // Stilk
+      ctx.moveTo(50 * u, 83 * u)
+      ctx.lineTo(50 * u, 78 * u)
+      // Blad kurve
+      ctx.bezierCurveTo(50 * u, 78 * u, 38 * u, 72 * u, 38 * u, 80 * u)
+      ctx.bezierCurveTo(38 * u, 85 * u, 50 * u, 83 * u, 50 * u, 83 * u)
+      ctx.fill()
+      ctx.beginPath()
+      ctx.moveTo(50 * u, 83 * u)
+      ctx.lineTo(50 * u, 78 * u)
+      ctx.bezierCurveTo(50 * u, 78 * u, 62 * u, 72 * u, 62 * u, 80 * u)
+      ctx.bezierCurveTo(62 * u, 85 * u, 50 * u, 83 * u, 50 * u, 83 * u)
+      ctx.fill()
+    }
+
+    function download(id, filename) {
+      const canvas = document.getElementById(id)
+      const a = document.createElement('a')
+      a.href = canvas.toDataURL('image/png')
+      a.download = filename
+      a.click()
+    }
+
+    drawIcon(document.getElementById('c192'))
+    drawIcon(document.getElementById('c512'))
+  </script>
+</body>
+</html>
