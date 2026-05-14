@@ -4,7 +4,7 @@ import { getItemStatus } from '../types'
 import { StatusBadge } from './StatusBadge'
 
 const GARDEN_EMOJIS: Record<string, string> = {
-  tree: '🌳', shrub: '🌿', plant: '🌱', bulb: '🌷', other: '🌾',
+  tree: '🌳', shrub: '🌿', plant: '🌱', bulb: '🌷', other: '🌾', task: '⚒️',
 }
 const HOUSE_EMOJIS: Record<string, string> = {
   woodwork: '🪵', windows: '🪟', terrace: '🏡', foundation: '🏗️', other: '🔧',

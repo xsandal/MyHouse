@@ -79,6 +79,24 @@ function buildPrompt(item: admin.firestore.DocumentData, experiences: string[]):
       ? `\nEgne erfaringer:\n${experiences.map((e) => `- ${e}`).join('\n')}`
       : ''
 
+  if (item.category === 'garden' && item.type === 'task') {
+    const lastPerformed =
+      item.lastPerformed
+        ? new Date((item.lastPerformed as admin.firestore.Timestamp).seconds * 1000)
+            .toLocaleDateString('da-DK')
+        : null
+
+    return [
+      `Haveopgave: ${item.name}`,
+      item.description ? `Beskrivelse: ${item.description}` : null,
+      lastPerformed ? `Sidst udført: ${lastPerformed}` : null,
+      expSection || null,
+      '\nGiv råd om denne haveopgave inkl. anbefalet frekvens, bedste tidspunkt på året og praktiske tips.',
+    ]
+      .filter(Boolean)
+      .join('\n')
+  }
+
   if (item.category === 'garden') {
     return [
       `Plante: ${item.name}${item.variety ? ` (${item.variety})` : ''}`,

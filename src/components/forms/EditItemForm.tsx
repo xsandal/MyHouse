@@ -10,6 +10,7 @@ interface Props {
 
 export function EditItemForm({ item, onClose }: Props) {
   const isGarden = item.category === 'garden'
+  const isGardenTask = isGarden && item.type === 'task'
   const accentFocus = isGarden ? 'focus:border-[#1D9E75]' : 'focus:border-[#378ADD]'
   const accentActive = isGarden ? 'bg-garden-bg text-garden-text' : 'bg-house-bg text-house-text'
   const accentCta = isGarden ? 'bg-[#1D9E75]' : 'bg-[#378ADD]'
@@ -42,7 +43,16 @@ export function EditItemForm({ item, onClose }: Props) {
         )
       }
 
-      if (isGarden) {
+      if (isGardenTask) {
+        await updateItem(item.id, {
+          name: name.trim(),
+          description: description.trim() || undefined,
+          imageUrl,
+          lastPerformed: lastPerformedStr
+            ? (await import('firebase/firestore')).Timestamp.fromDate(new Date(lastPerformedStr))
+            : item.lastPerformed,
+        })
+      } else if (isGarden) {
         await updateItem(item.id, {
           name: name.trim(),
           type,
@@ -93,7 +103,29 @@ export function EditItemForm({ item, onClose }: Props) {
             />
           </div>
 
-          {isGarden ? (
+          {isGardenTask ? (
+            <>
+              <div>
+                <label className="text-sm font-medium text-gray-700 block mb-1">Beskrivelse</label>
+                <textarea
+                  className={`w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm outline-none ${accentFocus} resize-none`}
+                  rows={3}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  placeholder="Valgfri beskrivelse..."
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-gray-700 block mb-1">Sidst udført</label>
+                <input
+                  type="date"
+                  className={`w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm outline-none ${accentFocus}`}
+                  value={lastPerformedStr}
+                  onChange={(e) => setLastPerformedStr(e.target.value)}
+                />
+              </div>
+            </>
+          ) : isGarden ? (
             <>
               <div>
                 <label className="text-sm font-medium text-gray-700 block mb-1">Type</label>

@@ -79,6 +79,7 @@ export function ItemDetail() {
   }
 
   const isGarden = item.category === 'garden'
+  const isGardenTask = isGarden && item.type === 'task'
   const accentBg = isGarden ? 'bg-garden-bg' : 'bg-house-bg'
   const accentText = isGarden ? 'text-garden-text' : 'text-house-text'
   const accentCta = isGarden ? 'bg-[#1D9E75]' : 'bg-[#378ADD]'
@@ -92,7 +93,7 @@ export function ItemDetail() {
         ) : (
           <span className="text-8xl">
             {isGarden
-              ? ({ tree: '🌳', shrub: '🌿', plant: '🌱', bulb: '🌷', other: '🌾' } as Record<string, string>)[item.type ?? 'other']
+              ? ({ tree: '🌳', shrub: '🌿', plant: '🌱', bulb: '🌷', other: '🌾', task: '⚒️' } as Record<string, string>)[item.type ?? 'other']
               : ({ woodwork: '🪵', windows: '🪟', terrace: '🏡', foundation: '🏗️', other: '🔧' } as Record<string, string>)[item.houseCategory ?? 'other']
             }
           </span>
@@ -143,19 +144,19 @@ export function ItemDetail() {
           <div className="space-y-4">
             {/* Details */}
             <div className="bg-white rounded-2xl p-4 space-y-2">
-              {isGarden && item.locationText && (
+              {isGarden && !isGardenTask && item.locationText && (
                 <div>
                   <p className="text-xs text-gray-400 uppercase tracking-wide">Placering</p>
                   <p className="text-sm text-gray-900 mt-0.5">{item.locationText}</p>
                 </div>
               )}
-              {!isGarden && item.description && (
+              {(!isGarden || isGardenTask) && item.description && (
                 <div>
                   <p className="text-xs text-gray-400 uppercase tracking-wide">Beskrivelse</p>
                   <p className="text-sm text-gray-900 mt-0.5">{item.description}</p>
                 </div>
               )}
-              {!isGarden && item.lastPerformed && (
+              {(!isGarden || isGardenTask) && item.lastPerformed && (
                 <div>
                   <p className="text-xs text-gray-400 uppercase tracking-wide">Sidst udført</p>
                   <p className="text-sm text-gray-900 mt-0.5">
@@ -169,7 +170,7 @@ export function ItemDetail() {
             <div className={`${accentBg} rounded-2xl p-4`}>
               <div className="flex items-center justify-between mb-2">
                 <p className={`text-xs font-semibold uppercase tracking-wide ${accentText}`}>
-                  {isGarden ? 'Plejeinformation' : 'Vedligeholdelsesråd'}
+                  {isGardenTask ? 'Vedligeholdelsesråd' : isGarden ? 'Plejeinformation' : 'Vedligeholdelsesråd'}
                 </p>
                 {careAdvice && (
                   <span className="text-xs text-gray-400">

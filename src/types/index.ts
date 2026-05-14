@@ -2,7 +2,7 @@ import type { Timestamp } from 'firebase/firestore'
 
 export type Category = 'garden' | 'house'
 
-export type GardenItemType = 'tree' | 'shrub' | 'plant' | 'bulb' | 'other'
+export type GardenItemType = 'tree' | 'shrub' | 'plant' | 'bulb' | 'other' | 'task'
 export type HouseCategory = 'woodwork' | 'windows' | 'terrace' | 'foundation' | 'other'
 export type RecurringType = 'none' | 'weekly' | 'monthly' | 'yearly'
 
