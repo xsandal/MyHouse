@@ -46,7 +46,7 @@ export function EditItemForm({ item, onClose }: Props) {
       if (isGardenTask) {
         await updateItem(item.id, {
           name: name.trim(),
-          description: description.trim() || undefined,
+          ...(description.trim() ? { description: description.trim() } : {}),
           imageUrl,
           lastPerformed: lastPerformedStr
             ? (await import('firebase/firestore')).Timestamp.fromDate(new Date(lastPerformedStr))
@@ -56,15 +56,15 @@ export function EditItemForm({ item, onClose }: Props) {
         await updateItem(item.id, {
           name: name.trim(),
           type,
-          variety: variety.trim() || undefined,
-          locationText: locationText.trim() || undefined,
+          ...(variety.trim() ? { variety: variety.trim() } : {}),
+          ...(locationText.trim() ? { locationText: locationText.trim() } : {}),
           imageUrl,
         })
       } else {
         await updateItem(item.id, {
           name: name.trim(),
           houseCategory,
-          description: description.trim() || undefined,
+          ...(description.trim() ? { description: description.trim() } : {}),
           imageUrl,
           lastPerformed: lastPerformedStr
             ? (await import('firebase/firestore')).Timestamp.fromDate(new Date(lastPerformedStr))
