@@ -45,7 +45,8 @@
 - **`CategoryToggle.tsx`** – Have/Hus-toggle der styrer `GardenContext.category`.
 - **`ItemCard.tsx`** – 2-kolonne kort med billede/emoji, navn, undertekst, badge.
 - **`BottomNav.tsx`** – Fast bundnavigation med 4 faner.
-- **`forms/AddItemForm.tsx`** – Formular til plante (navn, type, sort, placering, billede) og husopgave (titel, kategori, beskrivelse, billede). Bottom sheet modal.
+- **`forms/AddItemForm.tsx`** – Formular til plante (navn, type, sort, placering, billede), haveopgave (titel, beskrivelse, billede) og husopgave (titel, kategori, beskrivelse, billede). Plante/Opgave-toggle i have-tilstand. Bottom sheet modal.
+- **`forms/EditItemForm.tsx`** – Redigér eksisterende item med pre-populerede felter. Invaliderer cachet Claude-rådgivning ved navn/sort-ændring.
 - **`forms/AddReminderForm.tsx`** – Formular til påmindelser (titel, dato, gentagelse). Bottom sheet modal.
 - **`forms/AddExperienceForm.tsx`** – Formular til erfaringer (tekst, billede). Bottom sheet modal.
 
@@ -55,7 +56,7 @@
 - **`GardenSetup.tsx`** – Opret have / deltag med invite-kode.
 - **`Home.tsx`** – Forside med havenavn, CategoryToggle, 6-item grid, 3 kommende påmindelser, FAB.
 - **`Overview.tsx`** – Søgning, type-filter chips, gruppert liste, FAB.
-- **`ItemDetail.tsx`** – Hero billede, 3 faner (Info, Erfaringer, Påmindelser), Claude AI-rådgivning via Firebase callable.
+- **`ItemDetail.tsx`** – Hero billede, 3 faner (Info, Erfaringer, Påmindelser), Claude AI-rådgivning via Firebase callable. Redigér-knap (✏️) + slet. Viser opgavefelter (beskrivelse, sidst udført) for haveopgaver.
 - **`RemindersPage.tsx`** – Alle påmindelser grupperet: Forfaldne / Inden for 2 uger / Kommende.
 - **`Profile.tsx`** – Brugerprofil, have-info, invite-kode (kopierbar), push-notifikationer toggle, log ud.
 
@@ -75,9 +76,11 @@
 
 ## Hvad der mangler
 
-### 1. Firebase Hosting deploy
+### 1. PWA-ikoner
 
-Det eneste tilbageværende trin er at deploye til Firebase Hosting.
+`pwa-192x192.png` og `pwa-512x512.png` mangler i `public/`. Uden dem bygger appen men PWA-installationen er ufuldstændig.
+
+### 2. Firebase Hosting deploy
 
 ```bash
 npm run build
