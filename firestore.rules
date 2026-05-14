@@ -1,0 +1,44 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isGardenMember(gardenId) {
+      return isSignedIn() &&
+        request.auth.uid in get(/databases/$(database)/documents/gardens/$(gardenId)).data.members;
+    }
+
+    match /users/{userId} {
+      allow read, write: if isSignedIn() && request.auth.uid == userId;
+    }
+
+    match /gardens/{gardenId} {
+      allow read: if isGardenMember(gardenId);
+      allow create: if isSignedIn();
+      allow update: if isGardenMember(gardenId);
+    }
+
+    match /items/{itemId} {
+      allow read, write: if isGardenMember(resource.data.gardenId);
+      allow create: if isGardenMember(request.resource.data.gardenId);
+    }
+
+    match /reminders/{reminderId} {
+      allow read, write: if isGardenMember(resource.data.gardenId);
+      allow create: if isGardenMember(request.resource.data.gardenId);
+    }
+
+    match /experiences/{experienceId} {
+      allow read, write: if isGardenMember(resource.data.gardenId);
+      allow create: if isGardenMember(request.resource.data.gardenId);
+    }
+
+    match /careAdvice/{itemId} {
+      allow read: if isSignedIn();
+      allow write: if false; // kun Cloud Functions skriver
+    }
+  }
+}

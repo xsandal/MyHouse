@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-garden-bg: #E1F5EE;
+  --color-garden-text: #085041;
+  --color-house-bg: #E6F1FB;
+  --color-house-text: #0C447C;
+  --color-cta-garden: #1D9E75;
+  --color-cta-house: #378ADD;
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f9fafb;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  overscroll-behavior: none;
+}

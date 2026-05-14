@@ -1,0 +1,63 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "items",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "gardenId", "order": "ASCENDING" },
+        { "fieldPath": "addedAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "items",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "gardenId", "order": "ASCENDING" },
+        { "fieldPath": "category", "order": "ASCENDING" },
+        { "fieldPath": "addedAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "reminders",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "gardenId", "order": "ASCENDING" },
+        { "fieldPath": "completed", "order": "ASCENDING" },
+        { "fieldPath": "dueDate", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "reminders",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "completed", "order": "ASCENDING" },
+        { "fieldPath": "dueDate", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "reminders",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "itemId", "order": "ASCENDING" },
+        { "fieldPath": "dueDate", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "experiences",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "itemId", "order": "ASCENDING" },
+        { "fieldPath": "date", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "careAdvice",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "isStale", "order": "ASCENDING" },
+        { "fieldPath": "generatedAt", "order": "ASCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

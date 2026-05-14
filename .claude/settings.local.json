@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Github\\\\MyHouse\" -Force)",
+      "Bash(Select-Object Name, PSIsContainer)",
+      "Bash(Format-Table -AutoSize)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Github\\\\MyHouse\" -Force | ForEach-Object { $_.FullName })",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Github\\\\MyHouse\\\\.claude\" -Force -Recurse | ForEach-Object { $_.FullName })",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Github\\\\MyHouse\" -Force -Recurse | ForEach-Object { $_.FullName })",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Github\\\\MyHouse\" -Force -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.FullName -notmatch '\\\\.git' } | Select-Object FullName, @{Name='Type';Expression={if\\($_.PSIsContainer\\){'DIR'}else{'FILE'}}} | Sort-Object FullName)",
+      "Bash(npm --version)",
+      "Bash(firebase --version)",
+      "PowerShell(npm *)",
+      "PowerShell(& \"C:\\\\Program Files\\\\nodejs\\\\node.exe\" --version; & \"C:\\\\Program Files\\\\nodejs\\\\npm.cmd\" --version)",
+      "PowerShell(Remove-Item *)",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;\" + $env:PATH; Set-Location C:\\\\Github\\\\MyHouse; & \"C:\\\\Program Files\\\\nodejs\\\\npm.cmd\" run build 2>&1)",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;\" + $env:PATH; cd \"C:\\\\Github\\\\MyHouse\"; npx tsc --noEmit 2>&1 | Select-Object -First 80)",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;\" + $env:PATH; & \"C:\\\\Program Files\\\\nodejs\\\\node.exe\" \"C:\\\\Program Files\\\\nodejs\\\\node_modules\\\\npm\\\\bin\\\\npx-cli.js\" tsc --noEmit 2>&1 | Select-Object -First 80)"
+    ]
+  }
+}
