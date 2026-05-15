@@ -10,13 +10,13 @@ import type { GardenItemType, HouseCategory, Item, Reminder } from '../types'
 import { getItemStatus } from '../types'
 
 const GARDEN_TYPE_LABELS: Record<GardenItemType, string> = {
-  tree: 'Træ', shrub: 'Busk', plant: 'Plante', bulb: 'Løg', other: 'Andet',
+  tree: 'Træ', shrub: 'Busk', plant: 'Plante', bulb: 'Løg', other: 'Andet', task: 'Opgave',
 }
 const HOUSE_CAT_LABELS: Record<HouseCategory, string> = {
   woodwork: 'Træværk', windows: 'Vinduer', terrace: 'Terrasse', foundation: 'Fundament', other: 'Andet',
 }
 const GARDEN_EMOJIS: Record<GardenItemType, string> = {
-  tree: '🌳', shrub: '🌿', plant: '🌱', bulb: '🌷', other: '🌾',
+  tree: '🌳', shrub: '🌿', plant: '🌱', bulb: '🌷', other: '🌾', task: '⚒️',
 }
 const HOUSE_EMOJIS: Record<HouseCategory, string> = {
   woodwork: '🪵', windows: '🪟', terrace: '🏡', foundation: '🏗️', other: '🔧',
